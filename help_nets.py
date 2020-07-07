@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+
+"""
 __author__ = "SAI"
 __license__ = "GPLv3"
-__email__ = "andrew.foma@gmail.com"
 __status__ = "Dev"
+__version__ = '0.5'
 
 import ipaddress
 from random import shuffle
@@ -168,6 +171,9 @@ def return_clean_list(white_list: List,
     # в первом списке - целые чила - которые представляют собой все подсети /24
     # во втором списке - целые числа - которые представляют собой все подсети /32
     # print(len(nets_24), len(nets_32))
+    # region удалить 0 и последний
+    nets_32 = [net32 for net32 in nets_32 if (net32 % 256 != 0)]  # 192.168.1.0
+    nets_32 = [net32 for net32 in nets_32 if (net32 % 256 != 255)]  # 192.168.1.255
     return [nets_24, nets_32]
 
 
